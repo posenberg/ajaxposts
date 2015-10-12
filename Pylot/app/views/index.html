@@ -1,8 +1,30 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+    <meta charset="utf-8">
+    <title>Quotes</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script >
+      $(document).ready(function(){
+        $('#btn').click(function(){
+          $.get('posts/get', function(res) {
+          	console.log(res);
+            var htmlStr = "";
+            	htmlStr += "<div class='Posts'>";
+            	for (var i=0; i<res.posts.length; i++) {
+             	 	htmlStr += "<p>"+res.posts[i].description+"</p>";
+          		}
+            $('#quotes').html(htmlStr);
+          }, 'json');
+        });
+      });
+    </script>
   </head>
   <body>
-    The best place to start is the "WelcomeController.py" file in app/controllers.
+    <h1>Quotsy</h1>
+    <button id="btn">Get All Quotes</button>
+    <div id="quotes">
+
+    </div>
   </body>
 </html>
